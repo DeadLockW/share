@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -20,8 +21,10 @@ import org.springframework.stereotype.Controller;
 @EnableConfigurationProperties
 @EnableDiscoveryClient
 @EnableFeignClients
+@MapperScan(ServiceApplication.COM_SHARE_MAPPER)
 public class ServiceApplication {
 
+	static final String COM_SHARE_MAPPER = "com.share.mapper";
 	 private static final Logger log = LoggerFactory.getLogger(ServiceApplication.class);
 	
     public static void main(String[] args) throws UnknownHostException {
