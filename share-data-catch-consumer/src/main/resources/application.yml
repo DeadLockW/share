@@ -1,0 +1,23 @@
+server: 
+  port: 
+    8081
+spring:   application:    name: share-data-catch-consumer
+  profiles:
+    include:
+      - swagger
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 'wk19930829'
+    url: jdbc:mysql://106.13.47.54:3306/share?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 30000
+        readTimeout: 30000
+        loggerLevel: basic
+
+test:
+ name: wangkai

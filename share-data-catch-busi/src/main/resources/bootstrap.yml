@@ -1,0 +1,22 @@
+# ===================================================================
+# Spring Cloud Config bootstrap configuration for the "dev" profile
+# In prod profile, properties will be overwritten by the ones defined in bootstrap-prod.yml
+# ===================================================================
+nacos:
+  server-addr: 106.13.47.54:8848
+
+spring:
+  application:
+    name: share-data-catch-busi
+  profiles:
+    active: #spring.profiles.active#
+  cloud: 
+    config: 
+      enabled: false
+    nacos:
+      config:
+        server-addr: ${nacos.server-addr}
+        group: DEFAULT_GROUP
+        file-extension: properties
+      discovery:
+        server-addr: ${nacos.server-addr}
