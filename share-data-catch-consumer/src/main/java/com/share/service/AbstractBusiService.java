@@ -14,18 +14,18 @@ public abstract class AbstractBusiService implements IBusiService{
 	}
 
 	@Override
-	public BaseRespDto<BaseUserInfo> getUserInfoById(Long id) {
+	public BaseRespDto<BaseUserInfo> getUserInfoById(String param) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BaseRespDto addBaseUser(BaseUserInfo baseUserInfo) {
+	public BaseRespDto addBaseUser(String param) {
 		return null;
 	}
 
 	@Override
-	public BaseRespDto updateBaseUser(BaseUserInfo baseUserInfo) {
+	public BaseRespDto updateBaseUser(String param) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -4,7 +4,11 @@ public enum ActionTypeEnum {
 
 	GET_USER_INFO_LIST(1, "getUserInfoList", "查询用户列表"),
 	
-	ADD_USER_INFO(2, "addBaseUser", "新增用户");
+	ADD_USER_INFO(2, "addBaseUser", "新增用户"),
+
+	QUERY_USER_INFO_BY_ID(3,"getUserInfoById","根据id获取用户"),
+
+	UPDATE_USER_INFO(4,"updateBaseUser","编辑用户");
 
 	private int id;
 	private String actionName;

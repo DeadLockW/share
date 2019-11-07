@@ -48,7 +48,9 @@ public class QueryUserInfoService extends AbstractBusiService {
 	}
 
 	@Override
-	public BaseRespDto getUserInfoById(Long id) {
+	public BaseRespDto getUserInfoById(String param) {
+		JSONObject json = JSONObject.parseObject(param);
+		Long id = json.getLong("id");
 		BaseUserInfo baseUserInfo = baseUserInfoMapper.selectById(id);
 		return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.toJSON(baseUserInfo));
 	}

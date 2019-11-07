@@ -10,11 +10,11 @@ public interface IBusiService {
 	
 	BaseRespDto<List<BaseUserInfo>> getUserInfoList(String param);
 	
-	BaseRespDto<BaseUserInfo> getUserInfoById(Long id);
+	BaseRespDto<BaseUserInfo> getUserInfoById(String param);
 
-	BaseRespDto addBaseUser(BaseUserInfo baseUserInfo);
+	BaseRespDto addBaseUser(String param);
 	
-	BaseRespDto updateBaseUser(BaseUserInfo baseUserInfo);
+	BaseRespDto updateBaseUser(String param);
 	
 	BusiTypeEnum getBusiType();
 }

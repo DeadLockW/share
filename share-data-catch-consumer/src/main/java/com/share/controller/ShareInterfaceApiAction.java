@@ -55,13 +55,17 @@ public class ShareInterfaceApiAction {
 		case GET_USER_INFO_LIST:
 			baseRespDto = service.getUserInfoList(parm);
 			break;
-		case ADD_USER_INFO:
-			baseRespDto = service.addBaseUser(new BaseUserInfo());
+		case QUERY_USER_INFO_BY_ID:
+			baseRespDto = service.getUserInfoById(parm);
 			break;
+		case ADD_USER_INFO:
+			baseRespDto = service.addBaseUser(parm);
+			break;
+		case UPDATE_USER_INFO:
+			baseRespDto = service.updateBaseUser(parm);
 		default:
 			break;
 		}
 		return baseRespDto;
 	}
-
 }

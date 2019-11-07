@@ -1,7 +1,9 @@
 server: 
   port: 
-    8081
-spring:   application:    name: share-data-catch-consumer
+    80
+spring: 
+  application:
+    name: share-data-catch-consumer
   profiles:
     include:
       - swagger
@@ -10,6 +12,11 @@ spring:   application:    name: share-data-catch-consumer
     password: 'wk19930829'
     url: jdbc:mysql://106.13.47.54:3306/share?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
+  rabbitmq:
+    host: 172.16.5.2
+    port: 5672
+    username: admin
+    password: admin123
 
 feign:
   client:

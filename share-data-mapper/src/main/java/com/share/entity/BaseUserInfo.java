@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * 用户实基本信息体类
@@ -18,7 +20,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel(description = "用户实体类")
-public class BaseUserInfo extends BaseEntity {
+public class BaseUserInfo extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
