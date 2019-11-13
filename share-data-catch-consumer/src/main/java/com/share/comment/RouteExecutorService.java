@@ -28,10 +28,10 @@ public class RouteExecutorService implements IRouteExecutorService {
             if (method == null) throw new IllegalArgumentException("方法不存在");
             return method.invoke(obj,param);
         } catch (NoSuchMethodException e) {
-            log.error("方法不存在：",e);
+            log.error("方法不存在："+e);
             return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE,"方法不存在");
         } catch (Exception e) {
-            log.error("路由器执行失败：",e);
+            log.error("路由器执行失败："+e);
             return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE,"路由器执行失败");
         }
     }
