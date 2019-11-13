@@ -33,6 +33,7 @@ public class MpGenerator {
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(true);// XML columList
+        gc.setSwagger2(true);
         /* 自定义文件命名，注意 %s 会自动填充表实体属性！ */
         // gc.setMapperName("%sDao");
         // gc.setXmlName("%sDao");

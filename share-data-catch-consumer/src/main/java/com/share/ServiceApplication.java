@@ -20,7 +20,7 @@ import java.util.Map;
 @Controller
 @SpringBootApplication
 @EnableConfigurationProperties
-//@EnableDiscoveryClient 注册服务端需要加上这个注解
+@EnableDiscoveryClient
 @EnableFeignClients
 @MapperScan(ServiceApplication.COM_SHARE_MAPPER)
 @EnableAspectJAutoProxy

@@ -1,29 +1,15 @@
 package com.share.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.share.comment.BankServiceManager;
 import com.share.dto.BaseRespDto;
-import com.share.enums.ActionTypeEnum;
 import com.share.enums.BusiTypeEnum;
 import com.share.service.IBusiService;
-import com.share.service.IRouteExecutorService;
-import com.share.service.impl.busi.BusiUserInfoService;
-import com.share.service.impl.proxy.InvokeProxyService;
-import com.share.service.impl.query.QueryUserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.retry.annotation.EnableRetry;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import javax.annotation.Resource;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 @RestController
 @RequestMapping("share")

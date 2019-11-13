@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import com.share.constants.RabbitMqConstants;
 import com.share.mq.RabbitSender;
+import com.share.service.impl.rpc.RpcQueryUserInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -20,46 +22,39 @@ import com.share.mapper.BaseUserInfoMapper;
 import com.share.service.AbstractBusiService;
 
 @Component
+@Slf4j
 @SuppressWarnings("all")
 public class QueryUserInfoService extends AbstractBusiService {
 
-	@Resource
-	private BaseUserInfoMapper baseUserInfoMapper;
 
 	@Resource
-	private RabbitSender rabbitSender;
+	private RpcQueryUserInfoService rpcQueryUserInfoService;
 
 	@Override
 	public BaseRespDto<List<BaseUserInfo>> getUserInfoList(String param) {
-		JSONObject json = JSONObject.parseObject(param);
-		String userName = json.getString("userName");
-		String phone = json.getString("phone");
-		String sex = json.getString("sex");
-		String professional = json.getString("professional");
-		QueryWrapper<BaseUserInfo> queryWrapper = new QueryWrapper<BaseUserInfo>();
-		if (StringUtils.isNotBlank(userName)) {
-			queryWrapper.like("user_real_name", userName);
+
+		String json = null;
+		try {
+			json = rpcQueryUserInfoService.getUserInfoList(JSONObject.parseObject(param));
+			return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.parse(json));
+		} catch (Exception e) {
+			log.error("RpcQueryUserInfoService.getUserInfoList远程调用异常："+e);
+			e.printStackTrace();
+			return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE, ResultCodeConstants.HANDLE_FAIL_MSG);
 		}
-		if (StringUtils.isNotBlank(phone)) {
-			queryWrapper.eq("phone_num", phone);
-		}
-		if (StringUtils.isNotBlank(sex)) {
-			queryWrapper.eq("user_sex", sex);
-		}
-		if (StringUtils.isNotBlank(professional)) {
-			queryWrapper.like("professional", professional);
-		}
-		List<BaseUserInfo> list = baseUserInfoMapper.selectList(queryWrapper);
-		rabbitSender.send(RabbitMqConstants.QUERY_EXCHANGE,RabbitMqConstants.ROUTINGKEY_QUERY_USER,list,"12345678");
-		return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.toJSON(list));
 	}
 
 	@Override
 	public BaseRespDto getUserInfoById(String param) {
-		JSONObject json = JSONObject.parseObject(param);
-		Long id = json.getLong("id");
-		BaseUserInfo baseUserInfo = baseUserInfoMapper.selectById(id);
-		return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.toJSON(baseUserInfo));
+
+		String json = null;
+		try {
+			json =rpcQueryUserInfoService.getUserInfoById (JSONObject.parseObject(param));
+			return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.parse(json));
+		} catch (Exception e) {
+			log.error("RpcQueryUserInfoService.getUserInfoById远程调用异常："+e);
+			return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE, ResultCodeConstants.HANDLE_FAIL_MSG);
+		}
 	}
 
 	@Override
