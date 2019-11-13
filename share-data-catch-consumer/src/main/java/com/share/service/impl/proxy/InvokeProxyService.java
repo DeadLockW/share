@@ -1,9 +1,12 @@
 package com.share.service.impl.proxy;
 
+import org.springframework.stereotype.Component;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+@Component
 public class InvokeProxyService implements InvocationHandler{
 	
 	private Object targetObject;

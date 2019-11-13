@@ -84,4 +84,22 @@ public class BaseUserInfo extends BaseEntity implements Serializable {
 	@ApiModelProperty("职业类型")
 	private String professional;
 
+	/**
+	 * 邮箱
+	 */
+	@ApiModelProperty("邮箱")
+	private String emailAdd;
+
+	/**
+	 * 学校
+	 */
+	@ApiModelProperty("学校")
+	private String school;
+
+	/**
+	 * 专业
+	 */
+	@ApiModelProperty("专业")
+	private String major;
+
 }

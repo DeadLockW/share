@@ -2,9 +2,9 @@ package com.share.enums;
 
 public enum BusiTypeEnum {
 
-	BUSI_SERVICE_1001(1,"busi","业务处理"),
+	BUSI_SERVICE_1001(1,"BS1001","业务处理"),
 	
-	QUERY_SERVICE_1002(2,"query","业务查询");
+	QUERY_SERVICE_1002(2,"BS1002","业务查询");
 	
 	private int id;
 	private String busiType;

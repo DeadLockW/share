@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 
@@ -19,9 +20,10 @@ import java.util.Map;
 @Controller
 @SpringBootApplication
 @EnableConfigurationProperties
-@EnableDiscoveryClient
+//@EnableDiscoveryClient 注册服务端需要加上这个注解
 @EnableFeignClients
 @MapperScan(ServiceApplication.COM_SHARE_MAPPER)
+@EnableAspectJAutoProxy
 public class ServiceApplication {
 	
 	static final String COM_SHARE_MAPPER = "com.share.mapper";

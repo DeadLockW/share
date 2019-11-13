@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.share.constants.RabbitMqConstants;
+import com.share.mq.RabbitSender;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
@@ -22,7 +25,10 @@ public class QueryUserInfoService extends AbstractBusiService {
 
 	@Resource
 	private BaseUserInfoMapper baseUserInfoMapper;
-	
+
+	@Resource
+	private RabbitSender rabbitSender;
+
 	@Override
 	public BaseRespDto<List<BaseUserInfo>> getUserInfoList(String param) {
 		JSONObject json = JSONObject.parseObject(param);
@@ -44,6 +50,7 @@ public class QueryUserInfoService extends AbstractBusiService {
 			queryWrapper.like("professional", professional);
 		}
 		List<BaseUserInfo> list = baseUserInfoMapper.selectList(queryWrapper);
+		rabbitSender.send(RabbitMqConstants.QUERY_EXCHANGE,RabbitMqConstants.ROUTINGKEY_QUERY_USER,list,"12345678");
 		return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.toJSON(list));
 	}
 

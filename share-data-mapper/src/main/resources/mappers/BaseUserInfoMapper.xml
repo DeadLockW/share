@@ -11,6 +11,7 @@
         <result column="user_id" property="userId" />
         <result column="phone_num" property="phoneNum" />
         <result column="address" property="address" />
+        <result column="email_add" property="emailAdd" />
         <result column="nick_name" property="nickName" />
         <result column="user_age" property="userAge" />
         <result column="user_sex" property="userSex" />
@@ -23,7 +24,7 @@
     <sql id="Base_Column_List">
         is_delete,
         update_time,
-        id, user_real_name, user_id, phone_num, address, nick_name, user_age, user_sex, login_password, professional, creat_time
+        id, user_real_name, user_id, phone_num, address,email_add, nick_name, user_age, user_sex, login_password, professional, creat_time
     </sql>
 
 </mapper>
