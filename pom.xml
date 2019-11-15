@@ -39,11 +39,11 @@
         <!-- plugins version -->
         <sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
         <properties-maven-plugin.version>1.0.0</properties-maven-plugin.version>
-        
+
         <!--运行代码检查： mvn initialize verify sonar:sonar -->
 
         <json-lib.version>2.4</json-lib.version>
-        
+
         <project.version>0.0.1-SNAPSHOT</project.version>
 
 	</properties>
@@ -76,7 +76,7 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -133,11 +133,11 @@
 			    <artifactId>javax.servlet-api</artifactId>
 			    <version>${javax.servlet-api.version}</version>
 			</dependency>
-			<dependency>    
-			    <groupId>net.sf.json-lib</groupId>    
-			    <artifactId>json-lib</artifactId>    
-			    <version>${json-lib.version}</version>    
-			    <classifier>jdk15</classifier>    
+			<dependency>
+			    <groupId>net.sf.json-lib</groupId>
+			    <artifactId>json-lib</artifactId>
+			    <version>${json-lib.version}</version>
+			    <classifier>jdk15</classifier>
 			</dependency>
         </dependencies>
 	<modules>

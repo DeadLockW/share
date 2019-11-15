@@ -29,7 +29,7 @@ public class QueryUserInfoServiceImpl implements IQueryUserInfoService {
     public List<BaseUserInfo> getUserInfoList(JSONObject json) {
         QueryWrapper<BaseUserInfo> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotBlank(json.getString("userRealName"))) queryWrapper.eq("user_real_name",json.getString("userRealName"));
-        if (StringUtils.isNotBlank(json.getString("phoneNum"))) queryWrapper.eq("phone_num",json.getString("userRealName"));
+        if (StringUtils.isNotBlank(json.getString("phoneNum"))) queryWrapper.eq("phone_num",json.getString("phoneNum"));
         if (StringUtils.isNotBlank(json.getString("nickName"))) queryWrapper.like("nick_name",json.getString("nickName"));
         if (StringUtils.isNotBlank(json.getString("professional"))) queryWrapper.like("professional",json.getString("professional"));
         return baseUserInfoMapper.selectList(queryWrapper);

@@ -1,11 +1,8 @@
 package com.share.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.share.comment.BankServiceManager;
+import com.share.comment.BeanOfServiceManager;
 import com.share.service.IRouteExecutorService;
-import com.share.service.impl.busi.BusiUserInfoService;
-import com.share.service.impl.proxy.InvokeProxyService;
-import com.share.service.impl.query.QueryUserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,7 +26,7 @@ public class CommentController {
 //    protected BusiUserInfoService busiUserInfoService;
 
     @Resource
-    protected BankServiceManager bankServiceManager;
+    protected BeanOfServiceManager beanOfServiceManager;
 
     @Resource
     protected IRouteExecutorService iRouteExecutorService;

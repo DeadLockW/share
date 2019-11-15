@@ -2,9 +2,9 @@ package com.share.comment;
 
 import com.share.constants.ResultCodeConstants;
 import com.share.dto.BaseRespDto;
-import com.share.service.IBusiService;
 import com.share.service.IRouteExecutorService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -22,9 +22,8 @@ public class RouteExecutorService implements IRouteExecutorService {
     @Override
     public Object execute(Object obj, String actionName, String param) {
 
-        Method method = null;
         try {
-            method = obj.getClass().getMethod(actionName,String.class);
+            Method method = obj.getClass().getMethod(actionName,String.class);
             if (method == null) throw new IllegalArgumentException("方法不存在");
             return method.invoke(obj,param);
         } catch (NoSuchMethodException e) {
