@@ -1,0 +1,12 @@
+*.class
+*.iml
+*.gitignore
+/target/
+.idea
+.project
+.settings
+/share-data-catch-consumer/target/
+/share-data-catch-api/target/
+/share-data-catch-busi/target/
+/share-data-common/target/
+/share-data-mapper/target/
