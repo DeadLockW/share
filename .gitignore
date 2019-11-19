@@ -10,3 +10,9 @@
 /share-data-catch-busi/target/
 /share-data-common/target/
 /share-data-mapper/target/
+/share-data-catch-api/module_share-data-catch-api.xml
+/share-data-catch-busi/module_share-data-catch-busi.xml
+/share-data-catch-consumer/module_share-data-catch-consumer.xml
+/module_share-data-catch.xml
+/share-data-common/module_share-data-common.xml
+/share-data-mapper/module_share-data-mapper.xml

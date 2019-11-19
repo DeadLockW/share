@@ -32,6 +32,7 @@ public class LogAspect {
         HttpServletRequest request = attributes.getRequest();
         log.info("URL："+request.getRequestURL());
         log.info("IP:"+request.getRemoteAddr());
+        log.info("PORT:"+request.getServerPort());
         log.info("PATH:"+request.getServletPath());
         log.info("METHOD:"+request.getMethod());
         log.info("AGS:"+ Arrays.toString(joinPoint.getArgs()));

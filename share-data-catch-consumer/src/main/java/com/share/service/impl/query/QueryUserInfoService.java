@@ -43,7 +43,7 @@ public class QueryUserInfoService extends AbstractBusiService {
 			return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.parse(json));
 		} catch (Exception e) {
 			log.error("RpcQueryUserInfoService.getUserInfoList远程调用异常："+e);
-			throw e;
+			return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE, "远程调用失败");
 		}
 	}
 
@@ -56,7 +56,7 @@ public class QueryUserInfoService extends AbstractBusiService {
 			return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.parse(json));
 		} catch (Exception e) {
 			log.error("RpcQueryUserInfoService.getUserInfoById远程调用异常："+e);
-			throw e;
+			return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE, "远程调用失败");
 		}
 	}
 

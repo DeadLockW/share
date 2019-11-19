@@ -31,6 +31,7 @@ public class RouteExecutorService implements IRouteExecutorService {
             return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE,"方法不存在");
         } catch (Exception e) {
             log.error("路由器执行失败："+e);
+            e.printStackTrace();
             return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE,"路由器执行失败");
         }
     }
