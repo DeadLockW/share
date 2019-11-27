@@ -3,8 +3,8 @@
 # In prod profile, properties will be overwritten by the ones defined in bootstrap-prod.yml
 # ===================================================================
 nacos:
-  #server-addr: 106.13.47.54:8848
-  server-addr: 172.16.5.2:8848
+  server-addr: 106.13.47.54:8848
+  #server-addr: 172.16.5.2:8848
 
 spring:
   application:

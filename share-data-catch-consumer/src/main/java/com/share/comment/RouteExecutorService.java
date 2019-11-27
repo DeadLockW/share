@@ -1,13 +1,14 @@
 package com.share.comment;
 
+import java.lang.reflect.Method;
+
+import org.springframework.stereotype.Component;
+
 import com.share.constants.ResultCodeConstants;
 import com.share.dto.BaseRespDto;
 import com.share.service.IRouteExecutorService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * description: 路由控制类 <br>

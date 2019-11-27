@@ -22,25 +22,27 @@ import java.util.Arrays;
 @Component
 public class LogAspect {
 
-    @Pointcut("within(com.share.comment..*)")
+    @Pointcut("within(com.share.comment.RouteExecutorService)")
     public void logsPointCut(){}
 
     @Before("logsPointCut()")
     public void paramLogs (JoinPoint joinPoint) throws Throwable{
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        log.info("URL："+request.getRequestURL());
-        log.info("IP:"+request.getRemoteAddr());
-        log.info("PORT:"+request.getServerPort());
-        log.info("PATH:"+request.getServletPath());
-        log.info("METHOD:"+request.getMethod());
-        log.info("AGS:"+ Arrays.toString(joinPoint.getArgs()));
+		/*
+		 * HttpServletRequest request = attributes.getRequest();
+		 * log.info("URL："+request.getRequestURL());
+		 * log.info("IP:"+request.getRemoteAddr());
+		 * log.info("PORT:"+request.getServerPort());
+		 * log.info("PATH:"+request.getServletPath());
+		 * log.info("METHOD:"+request.getMethod());
+		 */
+        log.info("请求参数：:"+ Arrays.toString(joinPoint.getArgs()));
     }
 
     @AfterReturning(returning = "obj",pointcut = "logsPointCut()")
     public void resultLogs(Object obj) throws Throwable {
         log.info("请求完成");
-        log.info(">>>>>>>>>>>>>>>>RESPONSE :"+ JSONObject.toJSONString(obj));
+        log.info("响应结果 :"+ JSONObject.toJSONString(obj));
     }
 }
