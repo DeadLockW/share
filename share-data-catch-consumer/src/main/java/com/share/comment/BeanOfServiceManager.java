@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import com.share.enums.BusiTypeEnum;
-import com.share.service.IBusiService;
+import com.share.user.IBusiService;
 
 /**
  * @author wk

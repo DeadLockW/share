@@ -1,29 +1,20 @@
-package com.share.service.impl.query;
+package com.share.service.impl.user.query;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.netflix.client.ClientException;
-import com.share.constants.RabbitMqConstants;
-import com.share.mq.RabbitSender;
-import com.share.service.impl.rpc.RpcQueryUserInfoService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.EnableRetry;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.share.constants.ResultCodeConstants;
 import com.share.dto.BaseRespDto;
 import com.share.entity.BaseUserInfo;
 import com.share.enums.BusiTypeEnum;
-import com.share.mapper.BaseUserInfoMapper;
 import com.share.service.AbstractBusiService;
+import com.share.service.impl.rpc.user.RpcQueryUserInfoService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j

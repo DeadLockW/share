@@ -1,4 +1,4 @@
-package com.share;
+package com.share.constants;
 
 public interface ProfileConstants {
 

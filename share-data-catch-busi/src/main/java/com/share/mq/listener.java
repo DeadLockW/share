@@ -53,4 +53,26 @@ public class listener {
             e.printStackTrace();
         }
     }
+    
+    @RabbitListener(queues = RabbitMqConstants.QUEUE_QUERY_LOG)
+    public void queryLogBusiHandle(@RequestParam String str, Message message, Channel channel) throws Exception{
+        final long deliveryTag = message.getMessageProperties().getDeliveryTag();
+        try {
+            log.info("============top模式执行（query.log）==================："+str);
+            channel.basicAck(deliveryTag,false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @RabbitListener(queues = RabbitMqConstants.QUEUE_ADD_LOG)
+    public void addLogBusiHandle(@RequestParam String str, Message message, Channel channel) throws Exception{
+        final long deliveryTag = message.getMessageProperties().getDeliveryTag();
+        try {
+            log.info("============top模式执行（add.log）==================："+str);
+            channel.basicAck(deliveryTag,false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

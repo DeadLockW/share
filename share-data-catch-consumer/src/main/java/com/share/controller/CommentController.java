@@ -1,13 +1,15 @@
 package com.share.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.share.comment.BeanOfServiceManager;
-import com.share.service.IRouteExecutorService;
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import javax.annotation.Resource;
+import com.alibaba.fastjson.JSONObject;
+import com.share.comment.BeanOfServiceManager;
+import com.share.comment.IRouteExecutorService;
+import com.share.mq.RabbitSender;
 
 /**
  * description: CommentController <br>
@@ -30,6 +32,9 @@ public class CommentController {
 
     @Resource
     protected IRouteExecutorService iRouteExecutorService;
+    
+    @Resource
+    protected RabbitSender rabbitSender;
 
 //    @Resource
 //    protected InvokeProxyService invokeProxyService;

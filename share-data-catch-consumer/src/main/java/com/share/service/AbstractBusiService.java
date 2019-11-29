@@ -5,6 +5,7 @@ import java.util.List;
 import com.share.dto.BaseRespDto;
 import com.share.entity.BaseUserInfo;
 import com.share.enums.BusiTypeEnum;
+import com.share.user.IBusiService;
 
 public abstract class AbstractBusiService implements IBusiService{
 

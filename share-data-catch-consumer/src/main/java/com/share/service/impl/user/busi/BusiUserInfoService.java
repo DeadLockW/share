@@ -1,21 +1,18 @@
-package com.share.service.impl.busi;
+package com.share.service.impl.user.busi;
 
 import javax.annotation.Resource;
 
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.share.constants.RabbitMqConstants;
-import com.share.mq.RabbitSender;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSONObject;
+import com.share.constants.RabbitMqConstants;
 import com.share.constants.ResultCodeConstants;
 import com.share.dto.BaseRespDto;
 import com.share.entity.BaseUserInfo;
 import com.share.enums.BusiTypeEnum;
 import com.share.mapper.BaseUserInfoMapper;
+import com.share.mq.RabbitSender;
 import com.share.service.AbstractBusiService;
-
-import java.util.UUID;
 
 @Component
 @SuppressWarnings("all")

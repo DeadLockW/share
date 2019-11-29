@@ -21,6 +21,16 @@ public class RabbitMqConstants {
     * 添加用户queue
     */
     public static final String QUEUE_ADD_USER = "add.user";
+    
+    /**
+     * 添加logqueue
+     */
+     public static final String QUEUE_ADD_LOG = "add.log";
+     
+     /**
+      * 添加logqueue
+      */
+      public static final String QUEUE_QUERY_LOG = "query.log";
 
     /**
     *编辑户信息routKey
@@ -35,5 +45,5 @@ public class RabbitMqConstants {
     /**
      * 日志传输路由ley
      */
-     public static final String ROUTINGKEY_LOG_SEND = "*.user";
+     public static final String ROUTINGKEY_LOG_SEND = "*.log";
 }

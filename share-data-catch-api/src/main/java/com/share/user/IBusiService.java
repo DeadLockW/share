@@ -1,4 +1,4 @@
-package com.share.service;
+package com.share.user;
 
 import java.util.List;
 
@@ -17,4 +17,5 @@ public interface IBusiService {
 	BaseRespDto updateBaseUser(String param);
 	
 	BusiTypeEnum getBusiType();
+	
 }

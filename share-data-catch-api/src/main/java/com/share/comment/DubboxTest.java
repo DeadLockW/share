@@ -1,4 +1,4 @@
-package com.share;
+package com.share.comment;
 
 public interface DubboxTest {
 

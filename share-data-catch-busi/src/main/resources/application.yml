@@ -1,6 +1,6 @@
 server: 
   port: 
-    8088
+    8082
 spring: 
   application:
     name: share-data-catch-busi

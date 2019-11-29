@@ -17,6 +17,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.Environment;
 
+import com.share.constants.ProfileConstants;
+
 @SpringBootApplication
 @EnableConfigurationProperties
 @EnableDiscoveryClient

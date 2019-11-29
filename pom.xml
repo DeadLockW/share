@@ -139,11 +139,15 @@
 			    <version>${json-lib.version}</version>
 			    <classifier>jdk15</classifier>
 			</dependency>
-        </dependencies>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-commons</artifactId>
+			</dependency>
+	</dependencies>
 	<modules>
 		<module>share-data-catch-api</module>
 		<module>share-data-catch-busi</module>
-		<module>share-data-catch-consumer</module>
+		<module>share-data-catch-action</module>
     <module>share-data-mapper</module>
     <module>share-data-common</module>
   </modules>

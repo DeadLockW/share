@@ -37,7 +37,7 @@ public class RabbitConfig2 {
         return new DirectExchange(RabbitMqConstants.BUSI_EXCHANGE,true,false);
     }
     
-    //订阅模式
+    //通配符路由模式
     @Bean("topicExchange")
     public TopicExchange topicExchange(){
         return new TopicExchange(RabbitMqConstants.TOPIC_EXCHANGE,true,false);
@@ -61,11 +61,6 @@ public class RabbitConfig2 {
     @Bean("updateUserBinding")
     Binding updateUserBinding(@Qualifier("updateUserQueue")Queue queue,@Qualifier("busiDirectExchange") DirectExchange directExchange){
     	return BindingBuilder.bind(queue).to(directExchange).with(RabbitMqConstants.ROUTINGKEY_UPDATE_USER);
-    }
-   
-    @Bean("logSendBinging")
-    Binding logSendBinging(Queue queue,@Qualifier("topicExchange") TopicExchange topicExchange){
-        return BindingBuilder.bind(queue).to(topicExchange).with(RabbitMqConstants.ROUTINGKEY_LOG_SEND);
     }
     
 

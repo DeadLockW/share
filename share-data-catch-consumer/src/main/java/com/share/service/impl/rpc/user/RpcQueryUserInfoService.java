@@ -1,4 +1,4 @@
-package com.share.service.impl.rpc;
+package com.share.service.impl.rpc.user;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;

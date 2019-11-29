@@ -9,6 +9,15 @@
   <name>share-date-catch-apii</name>
   
    <dependencies>
-
+		<dependency>
+			<groupId>com.share</groupId>
+			<artifactId>share-data-mapper</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.share</groupId>
+			<artifactId>share-data-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
     </dependencies>
 </project>
