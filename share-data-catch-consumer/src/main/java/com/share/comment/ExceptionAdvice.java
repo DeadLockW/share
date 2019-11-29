@@ -1,15 +1,15 @@
 package com.share.comment;
 
-import com.alibaba.fastjson.JSONException;
-import com.share.constants.ResultCodeConstants;
-import com.share.dto.BaseRespDto;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
+import com.alibaba.fastjson.JSONException;
+import com.share.constants.ResultCodeConstants;
+import com.share.dto.BaseRespDto;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * description: 统一异常处理 <br>
