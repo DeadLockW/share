@@ -14,8 +14,11 @@ import com.share.mapper.BaseUserInfoMapper;
 import com.share.mq.RabbitSender;
 import com.share.service.AbstractBusiService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
 @SuppressWarnings("all")
+@Slf4j
 public class BusiUserInfoService extends AbstractBusiService {
 
 	@Resource
@@ -30,7 +33,10 @@ public class BusiUserInfoService extends AbstractBusiService {
         BaseUserInfo baseUserInfo = null;
         try {
             baseUserInfo = JSONObject.toJavaObject(JSONObject.parseObject(param), BaseUserInfo.class);
+           
             rabbitSender.send(RabbitMqConstants.BUSI_EXCHANGE,RabbitMqConstants.ROUTINGKEY_ADD_USER,baseUserInfo, baseUserInfo.getUserId());
+            log.info("===============BusiUserInfoService.addBaseUser()发送新增用户消息成功==============");
+            log.info("===============BusiUserInfoService.addBaseUser()发送日志记录消息成功==============");
             return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG);
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,6 +51,8 @@ public class BusiUserInfoService extends AbstractBusiService {
         try {
             baseUserInfo = JSONObject.toJavaObject(JSONObject.parseObject(param), BaseUserInfo.class);
             rabbitSender.send(RabbitMqConstants.BUSI_EXCHANGE,RabbitMqConstants.ROUTINGKEY_UPDATE_USER,baseUserInfo, baseUserInfo.getUserId());
+            log.info("===============BusiUserInfoService.updateBaseUser()发送更新用户信息消息成功==============");
+            log.info("===============BusiUserInfoService.updateBaseUser()发送日志记录消息成功==============");
             return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG);
         } catch (Exception e) {
             e.printStackTrace();

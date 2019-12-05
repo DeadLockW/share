@@ -2,6 +2,7 @@ package com.share.comment;
 
 import java.lang.reflect.Method;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.share.constants.ResultCodeConstants;
@@ -23,15 +24,25 @@ public class RouteExecutorService implements IRouteExecutorService {
     public Object execute(Object obj, String actionName, String param) {
 
         try {
+        	if(obj == null) {
+        		throw new IllegalArgumentException("找不到对应的业务类型");
+        	}
+        	if (StringUtils.isBlank(actionName)) {
+        		throw new IllegalArgumentException("业务名称不能为空");
+			}
+        	log.info("RouteExecutorService.execute执行器开始执行，业务类名称："+obj.getClass().getName());
+        	log.info("RouteExecutorService.execute执行器开始执行，函数名称："+actionName);
+        	log.info("RouteExecutorService.execute执行器开始执行，请求参数："+param);
             Method method = obj.getClass().getMethod(actionName,String.class);
-            if (method == null) throw new IllegalArgumentException("方法不存在");
+            if (method == null) {
+            	throw new IllegalArgumentException("不存在该函数");
+            }
             return method.invoke(obj,param);
         } catch (NoSuchMethodException e) {
-            log.error("方法不存在："+e);
-            return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE,"方法不存在");
+            log.error("不存在该函数："+e);
+            return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE,"不存在该函数");
         } catch (Exception e) {
             log.error("路由器执行失败："+e);
-            e.printStackTrace();
             return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE,"路由器执行失败");
         }
     }

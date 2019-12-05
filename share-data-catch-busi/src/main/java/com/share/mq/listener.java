@@ -1,18 +1,18 @@
 package com.share.mq;
 
-import com.alibaba.fastjson.JSONObject;
-import com.rabbitmq.client.Channel;
-import com.share.constants.RabbitMqConstants;
-import com.share.entity.BaseUserInfo;
-import com.share.service.IBusiUserInfoService;
-import lombok.extern.slf4j.Slf4j;
+import javax.annotation.Resource;
+
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.Resource;
-import java.util.List;
+import com.alibaba.fastjson.JSONObject;
+import com.rabbitmq.client.Channel;
+import com.share.constants.RabbitMqConstants;
+import com.share.service.IBusiUserInfoService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * description: Mq消息监听 <br>
@@ -34,7 +34,7 @@ public class listener {
 
         try {
             iBusiUserInfoService.addBaseUser(json);
-            log.info("============添加用户消息消费完成==================");
+            log.info("===============listener.addBusiHandle()消费新增用户消息成功==============");
             channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,32 +47,29 @@ public class listener {
 
         try {
             iBusiUserInfoService.updateBaseUser(json);
-            log.info("============更新用户消息消费完成==================");
+            log.info("===============listener.updateBusiHandle()消费更新用户消息成功==============");
             channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    @RabbitListener(queues = RabbitMqConstants.QUEUE_QUERY_LOG)
-    public void queryLogBusiHandle(@RequestParam String str, Message message, Channel channel) throws Exception{
-        final long deliveryTag = message.getMessageProperties().getDeliveryTag();
+    
+    /**
+     * 	记录日志监听（通配符模式）
+     * @param str
+     * @param message
+     * @param channel
+     * @throws Exception
+     */
+    @RabbitListener(queues = RabbitMqConstants.QUEUE_SAVE_LOG)
+    public void queryLogBusiHandle(@RequestParam String str, Message message, Channel channel) throws Exception{ final long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
-            log.info("============top模式执行（query.log）==================："+str);
+        	log.info("===============listener.queryLogBusiHandle()消费记录日志消息成功："+str);
             channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    @RabbitListener(queues = RabbitMqConstants.QUEUE_ADD_LOG)
-    public void addLogBusiHandle(@RequestParam String str, Message message, Channel channel) throws Exception{
-        final long deliveryTag = message.getMessageProperties().getDeliveryTag();
-        try {
-            log.info("============top模式执行（add.log）==================："+str);
-            channel.basicAck(deliveryTag,false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

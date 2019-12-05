@@ -2,6 +2,7 @@ package com.share.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,23 +25,14 @@ public class RabbitConfig {
         return new TopicExchange(RabbitMqConstants.TOPIC_EXCHANGE,true,false);
     }
 	
-    @Bean("queryLogQueue")
+    @Bean("saveLogQueue")
     public Queue queryLogQueue(){
-        return new Queue(RabbitMqConstants.QUEUE_QUERY_LOG,true);
+        return new Queue(RabbitMqConstants.QUEUE_SAVE_LOG,true);
     }
     
-    @Bean("addLogQueue")
-    public Queue addLogQueue(){
-        return new Queue(RabbitMqConstants.QUEUE_ADD_LOG,true);
-    }
-
-    @Bean("queryLogBinding")
-    Binding queryLogBinding(@Qualifier("queryLogQueue")Queue queue,@Qualifier("topicExchange") TopicExchange topicExchange){
+    @Bean("saveLogBinding")
+    Binding saveLogBinding(@Qualifier("saveLogQueue")Queue queue,@Qualifier("topicExchange") TopicExchange topicExchange){
     	return BindingBuilder.bind(queue).to(topicExchange).with(RabbitMqConstants.ROUTINGKEY_LOG_SEND);
     }
     
-    @Bean("addLogBinding")
-    Binding addLogBinding(@Qualifier("addLogQueue")Queue queue,@Qualifier("topicExchange") TopicExchange topicExchange){
-    	return BindingBuilder.bind(queue).to(topicExchange).with(RabbitMqConstants.ROUTINGKEY_LOG_SEND);
-    }
 }

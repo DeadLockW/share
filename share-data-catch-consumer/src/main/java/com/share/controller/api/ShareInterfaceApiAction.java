@@ -2,6 +2,7 @@ package com.share.controller.api;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @SuppressWarnings("all")
 public class ShareInterfaceApiAction extends CommentController{
+	
 
 	@RequestMapping(value = "/api")
 	@ApiOperation(value="统一請求API",httpMethod = "POST")
@@ -38,10 +40,6 @@ public class ShareInterfaceApiAction extends CommentController{
             String actionName = json.getString("actionName");
             IBusiService service = beanOfServiceManager.getBusiService(BusiTypeEnum.fromCode(busiType));
             if (service == null) throw new IllegalArgumentException("业务模式不存在！");
-
-            //mq通配符路由模式测试
-            rabbitSender.send(RabbitMqConstants.TOPIC_EXCHANGE, RabbitMqConstants.ROUTINGKEY_LOG_SEND, "日志输出", UUID.randomUUID().toString());
-            
             return (BaseRespDto) iRouteExecutorService.execute(service,actionName,parm);
 //		通过动态代理实现业务类
 //		service = (IBusiService) invokeProxyService.newProxyInstance(queryUserInfoService);

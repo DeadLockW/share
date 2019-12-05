@@ -21,7 +21,7 @@ import com.share.constants.RabbitMqConstants;
  * Created on 2018/9/14
  */
 @Configuration
-public class RabbitConfig2 {
+public class RabbitConfig {
 	
 	 /**
      * Queue和交换机 可以有4个参数
