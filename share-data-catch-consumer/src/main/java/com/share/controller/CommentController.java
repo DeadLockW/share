@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.alibaba.fastjson.JSONObject;
 import com.share.comment.BeanOfServiceManager;
 import com.share.comment.IRouteExecutorService;
+import com.share.dto.BaseReqDto;
 import com.share.mq.RabbitSender;
 
 /**
@@ -42,14 +43,12 @@ public class CommentController {
     /**
     * 請求參數校驗
     */
-    public JSONObject paramValidate(String param) {
+    public void paramValidate(BaseReqDto dto) {
         try {
-            JSONObject json = JSONObject.parseObject(param);
-            String busiType = json.getString("busiType");
+            String busiType = dto.getHeader().getTransType();
             if (StringUtils.isBlank(busiType))throw new IllegalArgumentException("业务模式不能为空！");
-            String actionName = json.getString("actionName");
+            String actionName = dto.getHeader().getTransName();
             if (StringUtils.isBlank(actionName)) throw new IllegalArgumentException("函数名不能为空！");
-            return json;
         } catch (Exception e){
             throw new IllegalArgumentException("请求参数格式有误！");
         }

@@ -32,6 +32,8 @@ spring:
     port: 5672
     username: admin
     password: admin123
+    publisher-confirms: true
+    publisher-returns: true
 
 feign:
   client:
@@ -40,10 +42,12 @@ feign:
         connectTimeout: 300000
         readTimeout: 300000
         loggerLevel: basic
+#设置日志级别
 logging:
   level: 
     com.alibaba.nacos.client.naming: 
       error
+      
 getValueFromNacos:
   appName: 
     share-data-catch-consumer

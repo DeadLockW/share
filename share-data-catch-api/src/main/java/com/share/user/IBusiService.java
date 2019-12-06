@@ -2,19 +2,20 @@ package com.share.user;
 
 import java.util.List;
 
+import com.share.dto.BaseReqDto;
 import com.share.dto.BaseRespDto;
 import com.share.entity.BaseUserInfo;
 import com.share.enums.BusiTypeEnum;
 
 public interface IBusiService {
 	
-	BaseRespDto<List<BaseUserInfo>> getUserInfoList(String param);
+	BaseRespDto<List<BaseUserInfo>> getUserInfoList(BaseReqDto<BaseUserInfo> dto);
 	
-	BaseRespDto<BaseUserInfo> getUserInfoById(String param);
+	BaseRespDto<BaseUserInfo> getUserInfoById(BaseReqDto<BaseUserInfo> dto);
 
-	BaseRespDto addBaseUser(String param);
+	BaseRespDto addBaseUser(BaseReqDto<BaseUserInfo> dto);
 	
-	BaseRespDto updateBaseUser(String param);
+	BaseRespDto updateBaseUser(BaseReqDto<BaseUserInfo> dto);
 	
 	BusiTypeEnum getBusiType();
 	

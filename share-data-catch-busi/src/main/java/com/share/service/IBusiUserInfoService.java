@@ -1,6 +1,7 @@
 package com.share.service;
 
-import com.alibaba.fastjson.JSONObject;
+import com.share.dto.BaseReqDto;
+import com.share.entity.BaseUserInfo;
 
 /**
  * description: IBusiUserInfoService <br>
@@ -13,10 +14,10 @@ public interface IBusiUserInfoService {
     /**
     * 添加用戶
     */
-     Boolean addBaseUser(JSONObject json);
+     Boolean addBaseUser(BaseReqDto<BaseUserInfo> dto);
 
      /**
      * 編輯用戶
      */
-     Boolean updateBaseUser(JSONObject json);
+     Boolean updateBaseUser(BaseReqDto<BaseUserInfo> dto);
 }

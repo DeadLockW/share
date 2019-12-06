@@ -1,6 +1,9 @@
 package com.share.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.share.dto.BaseReqDto;
+import com.share.entity.BaseUserInfo;
 import com.share.service.IQueryUserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -27,16 +32,18 @@ public class UserInfoQueryController {
     private IQueryUserInfoService iQueryUserInfoService;
 
     @RequestMapping(value = "/getUserInfoById",method = RequestMethod.POST)
-    public String getUserInfoById(@RequestBody JSONObject json){
-        log.info("======================UserInfoQueryController.getUserInfoById");
-        log.info("======================请求参数："+json.toString());
-        return JSONObject.toJSONString(iQueryUserInfoService.getUserInfoById(json));
+    public String getUserInfoById(@RequestBody BaseReqDto<BaseUserInfo> dto){
+        log.info("======================UserInfoQueryController.getUserInfoById()请求参数："+JSONObject.toJSONString(dto));
+        BaseUserInfo  baseUserInfo = iQueryUserInfoService.getUserInfoById(dto);
+        log.info("======================返回参数："+JSONObject.toJSONString(baseUserInfo));
+        return JSONObject.toJSONString(baseUserInfo);
     }
 
     @RequestMapping(value = "/getUserInfoList",method = RequestMethod.POST)
-    public String getUserInfoList(@RequestBody JSONObject json){
-        log.info("======================UserInfoQueryController.getUserInfoList");
-        log.info("======================请求参数："+json.toString());
-        return JSONObject.toJSONString(iQueryUserInfoService.getUserInfoList(json));
+    public String getUserInfoList(@RequestBody BaseReqDto<BaseUserInfo> dto){
+        log.info("======================UserInfoQueryController.getUserInfoList()请求参数："+JSONObject.toJSONString(dto));
+        List<BaseUserInfo> list = iQueryUserInfoService.getUserInfoList(dto);
+        log.info("======================返回参数："+JSONArray.toJSONString(list));
+        return JSONObject.toJSONString(list);
     }
 }

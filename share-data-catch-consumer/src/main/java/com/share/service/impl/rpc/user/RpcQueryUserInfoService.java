@@ -1,21 +1,32 @@
 package com.share.service.impl.rpc.user;
 
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.share.dto.BaseReqDto;
+import com.share.entity.BaseUserInfo;
 
 /**
- * description: RpcQueryUserInfoService <br>
+ * description: fegin远程调用 <br>
  * date: 2019/11/13 14:29 <br>
  * author: wk <br>
  * version: 1.0 <br>
  */
-@FeignClient(name = "share-data-catch-busi")
+@FeignClient(name = RpcQueryUserInfoService.APPICATION_NAME)
 public interface RpcQueryUserInfoService {
+	
+    public static final String APPICATION_NAME = "share-data-catch-busi";
+    
+    public static final String GET_USER_INFO_BY_ID_URL = "/queryUserInfo/getUserInfoById";
+    
+    public static final String GET_USER_INFO_LIST = "/queryUserInfo/getUserInfoList";
 
-    @RequestMapping(value = "/queryUserInfo/getUserInfoById",method = RequestMethod.POST)
-    String getUserInfoById(@RequestBody JSONObject json);
+    
+    @RequestMapping(value = RpcQueryUserInfoService.GET_USER_INFO_BY_ID_URL,method = RequestMethod.POST)
+    String getUserInfoById(@RequestBody BaseReqDto<BaseUserInfo> dto);
 
-    @RequestMapping(value = "/queryUserInfo/getUserInfoList",method = RequestMethod.POST)
-    String getUserInfoList(@RequestBody JSONObject json);
+    @RequestMapping(value = RpcQueryUserInfoService.GET_USER_INFO_LIST,method = RequestMethod.POST)
+    String getUserInfoList(@RequestBody BaseReqDto<BaseUserInfo> dto);
 }

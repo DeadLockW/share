@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
 import com.share.constants.RabbitMqConstants;
 import com.share.constants.ResultCodeConstants;
+import com.share.dto.BaseReqDto;
 import com.share.dto.BaseRespDto;
 import com.share.entity.BaseUserInfo;
 import com.share.enums.BusiTypeEnum;
@@ -28,13 +29,11 @@ public class BusiUserInfoService extends AbstractBusiService {
 	private RabbitSender rabbitSender;
 	
 	@Override
-	public BaseRespDto addBaseUser(String param) {
+	public BaseRespDto addBaseUser(BaseReqDto<BaseUserInfo> dto) {
 		//采用mq异步插入的形式
-        BaseUserInfo baseUserInfo = null;
         try {
-            baseUserInfo = JSONObject.toJavaObject(JSONObject.parseObject(param), BaseUserInfo.class);
            
-            rabbitSender.send(RabbitMqConstants.BUSI_EXCHANGE,RabbitMqConstants.ROUTINGKEY_ADD_USER,baseUserInfo, baseUserInfo.getUserId());
+            rabbitSender.send(RabbitMqConstants.BUSI_EXCHANGE,RabbitMqConstants.ROUTINGKEY_ADD_USER,JSONObject.toJSONString(dto), dto.getHeader().getTransId());
             log.info("===============BusiUserInfoService.addBaseUser()发送新增用户消息成功==============");
             log.info("===============BusiUserInfoService.addBaseUser()发送日志记录消息成功==============");
             return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG);
@@ -45,12 +44,10 @@ public class BusiUserInfoService extends AbstractBusiService {
 	}
 
 	@Override
-	public BaseRespDto updateBaseUser(String param) {
+	public BaseRespDto updateBaseUser(BaseReqDto<BaseUserInfo> dto) {
 
-        BaseUserInfo baseUserInfo = null;
         try {
-            baseUserInfo = JSONObject.toJavaObject(JSONObject.parseObject(param), BaseUserInfo.class);
-            rabbitSender.send(RabbitMqConstants.BUSI_EXCHANGE,RabbitMqConstants.ROUTINGKEY_UPDATE_USER,baseUserInfo, baseUserInfo.getUserId());
+            rabbitSender.send(RabbitMqConstants.BUSI_EXCHANGE,RabbitMqConstants.ROUTINGKEY_UPDATE_USER,JSONObject.toJSONString(dto), dto.getHeader().getTransId());
             log.info("===============BusiUserInfoService.updateBaseUser()发送更新用户信息消息成功==============");
             log.info("===============BusiUserInfoService.updateBaseUser()发送日志记录消息成功==============");
             return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG);

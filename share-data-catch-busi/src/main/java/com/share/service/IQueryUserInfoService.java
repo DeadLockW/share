@@ -1,9 +1,9 @@
 package com.share.service;
 
-import com.alibaba.fastjson.JSONObject;
-import com.share.entity.BaseUserInfo;
-
 import java.util.List;
+
+import com.share.dto.BaseReqDto;
+import com.share.entity.BaseUserInfo;
 
 /**
  * description: IQueryUserInfoService <br>
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IQueryUserInfoService {
 
-    public List<BaseUserInfo>  getUserInfoList(JSONObject json);
+    public List<BaseUserInfo>  getUserInfoList(BaseReqDto<BaseUserInfo> dto);
 
-    public BaseUserInfo getUserInfoById(JSONObject json);
+    public BaseUserInfo getUserInfoById(BaseReqDto<BaseUserInfo> dto);
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import com.share.constants.RabbitMqConstants;
+import com.share.dto.BaseReqDto;
+import com.share.entity.BaseUserInfo;
 import com.share.service.IBusiUserInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,36 +24,40 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Component
 @Slf4j
+@SuppressWarnings("all")
 public class listener {
 
     @Resource
     private IBusiUserInfoService iBusiUserInfoService;
 
     @RabbitListener(queues = RabbitMqConstants.QUEUE_ADD_USER)
-    public void addBusiHandle(JSONObject json, Message message, Channel channel) throws Exception{
+    public void addBusiHandle(@RequestParam String msg, Message message, Channel channel) throws Exception{
         final long deliveryTag = message.getMessageProperties().getDeliveryTag();
 
-
         try {
-            iBusiUserInfoService.addBaseUser(json);
+			BaseReqDto<BaseUserInfo> dto = JSONObject.toJavaObject(JSONObject.parseObject(msg), BaseReqDto.class);
+            iBusiUserInfoService.addBaseUser(dto);
             log.info("===============listener.addBusiHandle()消费新增用户消息成功==============");
-            channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
-            e.printStackTrace();
-        }
+        	log.error("新增用户异常："+e);
+        } finally {
+        	channel.basicAck(deliveryTag,false);
+		}
     }
 
     @RabbitListener(queues = RabbitMqConstants.QUEUE_UPDATE_USER)
-    public void updateBusiHandle(@RequestParam JSONObject json, Message message, Channel channel) throws Exception{
+    public void updateBusiHandle(@RequestParam String msg, Message message, Channel channel) throws Exception{
         final long deliveryTag = message.getMessageProperties().getDeliveryTag();
 
         try {
-            iBusiUserInfoService.updateBaseUser(json);
+        	BaseReqDto<BaseUserInfo> dto = JSONObject.toJavaObject(JSONObject.parseObject(msg), BaseReqDto.class);
+            iBusiUserInfoService.updateBaseUser(dto);
             log.info("===============listener.updateBusiHandle()消费更新用户消息成功==============");
-            channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
-            e.printStackTrace();
-        }
+        	log.error("新增用户异常："+e);
+        } finally {
+        	channel.basicAck(deliveryTag,false);
+		}
     }
     
     
@@ -63,11 +69,12 @@ public class listener {
      * @throws Exception
      */
     @RabbitListener(queues = RabbitMqConstants.QUEUE_SAVE_LOG)
-    public void queryLogBusiHandle(@RequestParam String str, Message message, Channel channel) throws Exception{ final long deliveryTag = message.getMessageProperties().getDeliveryTag();
+    public void saveLogHandle(@RequestParam String msg, Message message, Channel channel) throws Exception{ final long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
-        	log.info("===============listener.queryLogBusiHandle()消费记录日志消息成功："+str);
+        	log.info("===============listener.queryLogBusiHandle()消费记录日志消息成功："+msg);
             channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
+        	channel.basicReject(deliveryTag, false);
             e.printStackTrace();
         }
     }

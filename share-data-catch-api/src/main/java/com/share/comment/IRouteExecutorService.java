@@ -1,5 +1,7 @@
 package com.share.comment;
 
+import com.share.dto.BaseReqDto;
+
 /**
  * description: IRouteExecutorService <br>
  * date: 2019/11/12 14:30 <br>
@@ -11,5 +13,5 @@ public interface IRouteExecutorService {
     /**
     * 路由执行器
     */
-    public Object execute(Object obj, String actionName, String param);
+    public Object execute(Object obj, BaseReqDto dto);
 }
