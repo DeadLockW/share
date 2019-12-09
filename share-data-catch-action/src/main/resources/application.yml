@@ -1,9 +1,12 @@
 server: 
   port: 
-    8082
+    8081
 spring: 
   application:
-    name: share-data-catch-busi
+    name: share-data-catch-consumer
+  profiles:
+    include:
+      - swagger
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 'wk19930829'
@@ -29,15 +32,9 @@ spring:
     port: 5672
     username: admin
     password: admin123
-    listener:
-      #simple：同一个队列有多个消费者，只有一个队列可以消费到消息，轮询进行(SimpleMessageListenerContainer)
-      simple:
-        acknowledge-mode: manual #消费者手动确认模式
-        concurrency: 1 #设置每个 listener 消费者数量(并发消费消息数)
-        max-concurrency: 3 #设置每个 listener 消费者最大数
-        prefetch: 100 #预取数，上一个消息未确认时，发送给消费者的最大值
-        retry:
-          enabled: false
+    publisher-confirms: true
+    publisher-returns: true
+
 feign:
   client:
     config:
@@ -45,7 +42,12 @@ feign:
         connectTimeout: 300000
         readTimeout: 300000
         loggerLevel: basic
+#设置日志级别
 logging:
   level: 
     com.alibaba.nacos.client.naming: 
       error
+      
+getValueFromNacos:
+  appName: 
+    share-data-catch-consumer
