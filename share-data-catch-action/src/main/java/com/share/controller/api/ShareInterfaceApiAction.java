@@ -2,6 +2,7 @@ package com.share.controller.api;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.Resource;
+
 @RestController
 @RequestMapping("share")
 @RefreshScope
@@ -27,6 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ShareInterfaceApiAction extends CommentController{
 	
 
+    @Resource
+    private RedisTemplate redisTemplate;
+
 	@RequestMapping(value = "/api")
 	@ApiOperation(value="统一請求API",httpMethod = "POST")
 	public BaseRespDto api(@RequestBody String parm) {
@@ -35,6 +41,8 @@ public class ShareInterfaceApiAction extends CommentController{
         	if (StringUtils.isBlank(parm)) {
         		throw new IllegalArgumentException("请求参数不能为空！");
 			}
+            redisTemplate.opsForValue().set("name","wangkai");
+        	System.out.println(redisTemplate.opsForValue().get("name"));
             BaseReqDto dto = JSONObject.toJavaObject(JSONObject.parseObject(parm), BaseReqDto.class);
             paramValidate(dto);
             String busiType = dto.getHeader().getTransType();

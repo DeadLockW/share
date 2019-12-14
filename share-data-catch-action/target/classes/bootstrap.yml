@@ -16,10 +16,11 @@ spring:
       config: 
         file-extension: properties #指定控制台配置文件格式 也可以使用yml
         group: DEFAULT_GROUP
+        enabled: false
         #server-addr: 106.13.47.54:8848
         server-addr: 172.16.5.2:8848
       discovery:
-        enabled: true
+        enabled: false
         register-enabled: true
         #server-addr: 106.13.47.54:8848
         server-addr: 172.16.5.2:8848

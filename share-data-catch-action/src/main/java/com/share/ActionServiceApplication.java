@@ -23,17 +23,17 @@ import com.share.constants.ProfileConstants;
 @EnableConfigurationProperties
 @EnableDiscoveryClient
 @EnableFeignClients
-@MapperScan(ServiceApplication.COM_SHARE_MAPPER)
+@MapperScan(ActionServiceApplication.COM_SHARE_MAPPER)
 @EnableAspectJAutoProxy
 @RefreshScope
-public class ServiceApplication {
+public class ActionServiceApplication {
 	
 	static final String COM_SHARE_MAPPER = "com.share.mapper";
 
-	 private static final Logger log = LoggerFactory.getLogger(ServiceApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(ActionServiceApplication.class);
 	 
     public static void main(String[] args) throws UnknownHostException{
-        SpringApplication application = new SpringApplication(ServiceApplication.class);
+        SpringApplication application = new SpringApplication(ActionServiceApplication.class);
 		addDefaultProfile(application);
 		
 		Environment environment = application.run(args).getEnvironment();
