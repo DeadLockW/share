@@ -150,11 +150,11 @@ public class JedisConfig extends CachingConfigurerSupport {
         return template;
     }
 
-    *//**
+    /**
      * 重新实现StringRedisTmeplate：键值都是String的的数据
      * @param redisConnectionFactory
      * @return
-     *//*
+     */
     @Bean
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         StringRedisTemplate template = new StringRedisTemplate();
@@ -170,6 +170,6 @@ public class JedisConfig extends CachingConfigurerSupport {
         // hash的value序列化方式采用jackson序列化方式
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
         return template;
-    }*/
+    }
 
 }
