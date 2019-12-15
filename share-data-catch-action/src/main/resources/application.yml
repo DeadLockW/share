@@ -3,7 +3,7 @@ server:
     8081
 spring: 
   application:
-    name: share-data-catch-consumer
+    name: share-data-catch-action
   profiles:
     include:
       - swagger
