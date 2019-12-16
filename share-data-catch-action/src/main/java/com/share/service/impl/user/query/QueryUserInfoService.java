@@ -37,7 +37,7 @@ public class QueryUserInfoService extends AbstractBusiService {
 		String json = null;
 		try {
 			json = rpcQueryUserInfoService.getUserInfoList(dto);
-			log.info("===============QueryUserInfoService.getUserInfoList()获取用户列表数据成功==============");
+			log.info("=========获取用户列表数据成功：{}",json);
 			
 			try {
 				rabbitSender.send(RabbitMqConstants.TOPIC_EXCHANGE,RabbitMqConstants.ROUTINGKEY_QUERY_USER,JSONObject.toJSONString(dto), dto.getHeader().getTransId());
@@ -58,7 +58,7 @@ public class QueryUserInfoService extends AbstractBusiService {
 		String json = null;
 		try {
 			json =rpcQueryUserInfoService.getUserInfoById (dto);
-			log.info("===============QueryUserInfoService.getUserInfoById()根据id查询用户数据成功==============");
+			log.info("===============根据id:{}查询用户数据成功：{}",dto.getBodyObject(BaseUserInfo.class).getId(),json);
 			
 			try {
 				rabbitSender.send(RabbitMqConstants.TOPIC_EXCHANGE,RabbitMqConstants.ROUTINGKEY_QUERY_USER,JSONObject.toJSONString(dto), dto.getHeader().getTransId());
@@ -66,7 +66,7 @@ public class QueryUserInfoService extends AbstractBusiService {
 				log.error("RpcQueryUserInfoService.getUserInfoById日志发送mq异常："+e);
 				return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE, "日志发送mq失败");
 			}
-			log.info("===============QueryUserInfoService.getUserInfoById()发送日志记录消息成功==============");
+			log.info("===============QueryUserInfoService.getUserInfoById()发送日志记录消息成功");
 			return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG, JSONObject.parse(json));
 		} catch (Exception e) {
 			log.error("RpcQueryUserInfoService.getUserInfoById远程调用异常："+e);

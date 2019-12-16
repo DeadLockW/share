@@ -33,17 +33,17 @@ public class UserInfoQueryController {
 
     @RequestMapping(value = "/getUserInfoById",method = RequestMethod.POST)
     public String getUserInfoById(@RequestBody BaseReqDto<BaseUserInfo> dto){
-        log.info("======================UserInfoQueryController.getUserInfoById()请求参数："+JSONObject.toJSONString(dto));
+        log.info("==========根据id查询用户信息请求参数："+JSONObject.toJSONString(dto));
         BaseUserInfo  baseUserInfo = iQueryUserInfoService.getUserInfoById(dto);
-        log.info("======================返回参数："+JSONObject.toJSONString(baseUserInfo));
+        log.info("==========根据id查询用户信息返回参数："+JSONObject.toJSONString(baseUserInfo));
         return JSONObject.toJSONString(baseUserInfo);
     }
 
     @RequestMapping(value = "/getUserInfoList",method = RequestMethod.POST)
     public String getUserInfoList(@RequestBody BaseReqDto<BaseUserInfo> dto){
-        log.info("======================UserInfoQueryController.getUserInfoList()请求参数："+JSONObject.toJSONString(dto));
+        log.info("==========查询用户信息列表请求参数："+JSONObject.toJSONString(dto));
         List<BaseUserInfo> list = iQueryUserInfoService.getUserInfoList(dto);
-        log.info("======================返回参数："+JSONArray.toJSONString(list));
+        log.info("==========查询用户信息列表返回参数："+JSONArray.toJSONString(list));
         return JSONObject.toJSONString(list);
     }
 }

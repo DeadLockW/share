@@ -37,7 +37,7 @@ public class listener {
         try {
 			BaseReqDto<BaseUserInfo> dto = JSONObject.toJavaObject(JSONObject.parseObject(msg), BaseReqDto.class);
             iBusiUserInfoService.addBaseUser(dto);
-            log.info("===============listener.addBusiHandle()消费新增用户消息成功==============");
+            log.info("==========listener.addBusiHandle()消费新增用户消息成功");
         } catch (Exception e) {
         	log.error("新增用户异常："+e);
         } finally {
@@ -53,7 +53,7 @@ public class listener {
         try {
         	BaseReqDto<BaseUserInfo> dto = JSONObject.toJavaObject(JSONObject.parseObject(msg), BaseReqDto.class);
             iBusiUserInfoService.updateBaseUser(dto);
-            log.info("===============listener.updateBusiHandle()消费更新用户消息成功==============");
+            log.info("==========listener.updateBusiHandle()消费更新用户消息成功");
         } catch (Exception e) {
         	log.error("新增用户异常："+e);
         } finally {
@@ -72,7 +72,7 @@ public class listener {
     @RabbitListener(queues = RabbitMqConstants.QUEUE_SAVE_LOG)
     public void saveLogHandle(@RequestParam String msg, Message message, Channel channel) throws Exception{ final long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
-        	log.info("===============listener.queryLogBusiHandle()消费记录日志消息成功："+msg);
+        	log.info("==========listener.queryLogBusiHandle()消费记录日志消息成功："+msg);
             channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
         	channel.basicReject(deliveryTag, false);

@@ -40,7 +40,9 @@ public class RouteExecutorService implements IRouteExecutorService {
             if (method == null) {
             	throw new IllegalArgumentException("不存在该函数");
             }
-            return method.invoke(obj,dto);
+            Object object = method.invoke(obj,dto);
+            log.info("RouteExecutorService.execute执行器结束执行，返回参结果："+object.toString());
+            return object;
         } catch (NoSuchMethodException e) {
             log.error("不存在该函数："+e);
             return BaseRespDto.build(ResultCodeConstants.HANDLE_FAIL_CODE,"不存在该函数");

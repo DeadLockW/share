@@ -34,8 +34,8 @@ public class BusiUserInfoService extends AbstractBusiService {
         try {
            
             rabbitSender.send(RabbitMqConstants.BUSI_EXCHANGE,RabbitMqConstants.ROUTINGKEY_ADD_USER,JSONObject.toJSONString(dto), dto.getHeader().getTransId());
-            log.info("===============BusiUserInfoService.addBaseUser()发送新增用户消息成功==============");
-            log.info("===============BusiUserInfoService.addBaseUser()发送日志记录消息成功==============");
+            log.info("==========BusiUserInfoService.addBaseUser()发送新增用户消息成功：{}",JSONObject.toJSONString(dto));
+            log.info("==========BusiUserInfoService.addBaseUser()发送日志记录消息成功");
             return BaseRespDto.build(ResultCodeConstants.HANDLE_SUCCESS_CODE, ResultCodeConstants.HANDLE_SUCCESS_MSG);
         } catch (Exception e) {
             e.printStackTrace();
