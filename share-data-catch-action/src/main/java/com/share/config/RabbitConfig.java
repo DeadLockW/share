@@ -10,8 +10,10 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import com.share.constants.RabbitMqConstants;
 
@@ -73,14 +75,13 @@ public class RabbitConfig {
      * ReturnCallback接口用于实现消息发送到RabbitMQ 交换器，但无相应队列与交换器绑定时的回调  即消息发送不到任何一个队列中  ack
      */
     @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)//如果要设置回调类，这里需要设置为多例
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
     RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 
         Logger log = LoggerFactory.getLogger(RabbitTemplate.class);
-
         // 消息发送失败返回到队列中, yml需要配置 publisher-returns: true
         rabbitTemplate.setMandatory(true);
-
         // 消息返回, yml需要配置 publisher-returns: true
         //通过实现 ReturnCallback 接口，启动消息失败返回，比如路由不到队列时触发回调
         rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {

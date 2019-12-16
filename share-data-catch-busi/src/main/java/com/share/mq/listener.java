@@ -41,7 +41,8 @@ public class listener {
         } catch (Exception e) {
         	log.error("新增用户异常："+e);
         } finally {
-        	channel.basicAck(deliveryTag,false);
+        	channel.basicAck(deliveryTag, false);//确认消费，从队列中删除消息   true：不删除
+//        	channel.basicReject(deliveryTag,true);//如果拒绝消息，且为true:消息会重新入队列，并且不断消费，如果false拒绝消息，且从队列中删除消息
 		}
     }
 
