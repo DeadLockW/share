@@ -1,16 +1,13 @@
 package com.share.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -18,7 +15,7 @@ import org.springframework.context.annotation.Scope;
 import com.share.constants.RabbitMqConstants;
 
 /**
- * rabbitMq 配置类(主要为了定制一些处理策略，如生产端手动确认机制)
+ * rabbitMq 配置类
  * @author wk
  * Created on 2018/9/14
  */
@@ -65,40 +62,19 @@ public class RabbitConfig {
     	return BindingBuilder.bind(queue).to(directExchange).with(RabbitMqConstants.ROUTINGKEY_UPDATE_USER);
     }
     
-
-    /** ======================== 定制一些处理策略 =============================*/
-
-    /**
-     * 定制化amqp模版
-     *
-     * ConfirmCallback接口用于实现消息发送到RabbitMQ交换器后接收ack回调   即消息发送到exchange  ack
-     * ReturnCallback接口用于实现消息发送到RabbitMQ 交换器，但无相应队列与交换器绑定时的回调  即消息发送不到任何一个队列中  ack
-     */
-    @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)//如果要设置回调类，这里需要设置为多例
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-    RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-
-        Logger log = LoggerFactory.getLogger(RabbitTemplate.class);
-        // 消息发送失败返回到队列中, yml需要配置 publisher-returns: true
-        rabbitTemplate.setMandatory(true);
-        // 消息返回, yml需要配置 publisher-returns: true
-        //通过实现 ReturnCallback 接口，启动消息失败返回，比如路由不到队列时触发回调
-        rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
-            String correlationId = message.getMessageProperties().getCorrelationId();
-            log.debug("消息：{} 发送失败, 应答码：{} 原因：{} 交换机: {}  路由键: {}", correlationId, replyCode, replyText, exchange, routingKey);
-        });
-
-        // 消息确认, yml需要配置 publisher-confirms: true
-        //通过实现 ConfirmCallback 接口，消息发送到 Broker 后触发回调，确认消息是否到达 Broker 服务器，也就是只确认是否正确到达 Exchange 中
-        rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
-            if (ack) {
-                 log.debug("消息发送到exchange成功,id: {}", correlationData.getId());
-            } else {
-                log.debug("消息发送到exchange失败,原因: {}", cause);
-            }
-        });
-
-        return rabbitTemplate;
+    @Bean("saveLogQueue")
+    public Queue queryLogQueue(){
+        return new Queue(RabbitMqConstants.QUEUE_SAVE_LOG,true);
     }
+    
+    @Bean("saveLogBinding")
+    Binding saveLogBinding(@Qualifier("saveLogQueue")Queue queue,@Qualifier("topicExchange") TopicExchange topicExchange){
+    	return BindingBuilder.bind(queue).to(topicExchange).with(RabbitMqConstants.ROUTINGKEY_LOG_SEND);
+    }
+    
+    @Bean
+	public Jackson2JsonMessageConverter jackson2MessageConverter() {
+		return new Jackson2JsonMessageConverter();
+	}
+    
 }
