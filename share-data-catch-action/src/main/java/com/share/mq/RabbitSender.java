@@ -92,6 +92,7 @@ public class RabbitSender {
             } else {
             	log.info("==========消息发送服务器成功！");
 			}
+            //更新mq状态
         }
 
     };
@@ -105,6 +106,7 @@ public class RabbitSender {
         public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
             log.info("return exchange: " + exchange + ", routingKey: "
                     + routingKey + ", replyCode: " + replyCode + ", replyText: " + replyText);
+          //更新mq状态
         }
     };
 }

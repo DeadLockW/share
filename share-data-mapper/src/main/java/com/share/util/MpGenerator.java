@@ -63,7 +63,7 @@ public class MpGenerator {
 //                "electronic_receipt", "msg_com_recv", "msg_com_send", "sdrcb_pay_batch", "sdrcb_pay_batch_detail",
 //                "sdrcb_pay_batch_group", "sdrcb_pay_single", "spdb_pay_batch", "spdb_pay_batch_detail", "spdb_pay_batch_group",
 //                "spdb_pay_single", "system_dict", "system_monitor", "system_param"}); // 需要生成的表
-        strategy.setInclude(new String[]{"base_user_info"});
+        strategy.setInclude(new String[]{"msg_mq_log"});
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
          strategy.setSuperEntityClass("com.share.entity.BaseEntity");

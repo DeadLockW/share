@@ -18,7 +18,7 @@ import com.share.user.IBusiService;
  */
 @Component
 public class BeanOfServiceManager implements ApplicationContextAware {
-
+	
     private ApplicationContext applicationContext;
     private Map<BusiTypeEnum, IBusiService> beanMap = new HashMap<>();
 
