@@ -41,6 +41,7 @@ public class Schedule {
 	@Scheduled(cron = "0 0/30 * * * ?")
 	public void excute() {
 		
+		log.info("定时任务开始执行");
 		QueryWrapper<MsgMqLog> queryWrapper = new QueryWrapper<MsgMqLog>();
 		queryWrapper.eq("is_delete", Contansts.ZERO_0);
 		queryWrapper.le("send_count", Contansts.THREE_3);
