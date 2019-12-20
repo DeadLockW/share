@@ -15,7 +15,7 @@ import com.share.entity.BaseUserInfo;
 import com.share.enums.BusiTypeEnum;
 import com.share.mq.RabbitSender;
 import com.share.service.AbstractBusiService;
-import com.share.service.impl.rpc.user.RpcQueryUserInfoService;
+import com.share.service.impl.rpc.user.FeginQueryUserInfoService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,7 +26,7 @@ public class QueryUserInfoService extends AbstractBusiService {
 
 
 	@Resource
-	private RpcQueryUserInfoService rpcQueryUserInfoService;
+	private FeginQueryUserInfoService rpcQueryUserInfoService;
 	
 	@Resource
 	private RabbitSender rabbitSender;

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.GetResponse;
+import com.share.constants.MqStatusContants;
+import com.share.service.componet.ISaveMqLogService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +30,10 @@ public class RabbitSender {
     private RabbitTemplate rabbitTemplate;
     
     @Resource
-    private Jackson2JsonMessageConverter jackson2MessageConverter;
+    private ISaveMqLogService iSaveMqLogService;
+    
+    @Resource
+    private Jackson2JsonMessageConverter jackson2JsonMessageConverter;
 
     /** 
     * @Description: 发送消息
@@ -42,7 +47,7 @@ public class RabbitSender {
         	rabbitTemplate.setConfirmCallback(confirmCallback);
         	rabbitTemplate.setReturnCallback(returnCallback);
         	rabbitTemplate.setMandatory(true);
-        	rabbitTemplate.setMessageConverter(jackson2MessageConverter);
+        	rabbitTemplate.setMessageConverter(jackson2JsonMessageConverter);
             rabbitTemplate.convertAndSend(exchange, routKey,
                     msg, new CorrelationData(msgId));
         } catch (AmqpException e) {
@@ -93,6 +98,7 @@ public class RabbitSender {
             	log.info("==========消息发送服务器成功！");
 			}
             //更新mq状态
+            iSaveMqLogService.updateMqLog(ack ? MqStatusContants.MQ_STATUS_0 : MqStatusContants.MQ_STATUS_3, correlationData.getId());
         }
 
     };
@@ -106,7 +112,6 @@ public class RabbitSender {
         public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
             log.info("return exchange: " + exchange + ", routingKey: "
                     + routingKey + ", replyCode: " + replyCode + ", replyText: " + replyText);
-          //更新mq状态
         }
     };
 }

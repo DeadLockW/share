@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
+import com.share.constants.MqStatusContants;
 import com.share.constants.RabbitMqConstants;
 import com.share.dto.BaseReqDto;
 import com.share.entity.BaseUserInfo;
 import com.share.service.IBusiUserInfoService;
+import com.share.service.ISaveMqLogService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,19 +31,24 @@ public class listener {
 
     @Resource
     private IBusiUserInfoService iBusiUserInfoService;
+    
+    @Resource
+    private ISaveMqLogService iSaveMqLogService;
 
     @RabbitListener(queues = RabbitMqConstants.QUEUE_ADD_USER)
     public void addBusiHandle(@RequestParam String msg, Message message, Channel channel) throws Exception{
         final long deliveryTag = message.getMessageProperties().getDeliveryTag();
-
+        BaseReqDto<BaseUserInfo> dto = null;
         try {
-			BaseReqDto<BaseUserInfo> dto = JSONObject.toJavaObject(JSONObject.parseObject(msg), BaseReqDto.class);
+        	log.info("==================消息："+new String(msg));
+			dto = JSONObject.toJavaObject(JSONObject.parseObject(msg), BaseReqDto.class);
             iBusiUserInfoService.addBaseUser(dto);
             log.info("==========listener.addBusiHandle()消费新增用户消息成功");
         } catch (Exception e) {
         	log.error("新增用户异常："+e);
         } finally {
         	channel.basicAck(deliveryTag, false);//确认消费，从队列中删除消息   true：不删除
+        	iSaveMqLogService.updateMqLog(MqStatusContants.MQ_STATUS_4, dto.getHeader().getTransId());
 //        	channel.basicReject(deliveryTag,true);//如果拒绝消息，且为true:消息会重新入队列，并且不断消费，如果false拒绝消息，且从队列中删除消息
 		}
     }

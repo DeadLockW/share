@@ -14,8 +14,8 @@ import com.share.entity.BaseUserInfo;
  * author: wk <br>
  * version: 1.0 <br>
  */
-@FeignClient(name = RpcQueryUserInfoService.APPICATION_NAME)
-public interface RpcQueryUserInfoService {
+@FeignClient(name = FeginQueryUserInfoService.APPICATION_NAME)
+public interface FeginQueryUserInfoService {
 	
     public static final String APPICATION_NAME = "share-data-catch-busi";
     
@@ -24,9 +24,9 @@ public interface RpcQueryUserInfoService {
     public static final String GET_USER_INFO_LIST = "/queryUserInfo/getUserInfoList";
 
     
-    @RequestMapping(value = RpcQueryUserInfoService.GET_USER_INFO_BY_ID_URL,method = RequestMethod.POST)
+    @RequestMapping(value = FeginQueryUserInfoService.GET_USER_INFO_BY_ID_URL,method = RequestMethod.POST)
     String getUserInfoById(@RequestBody BaseReqDto<BaseUserInfo> dto);
 
-    @RequestMapping(value = RpcQueryUserInfoService.GET_USER_INFO_LIST,method = RequestMethod.POST)
+    @RequestMapping(value = FeginQueryUserInfoService.GET_USER_INFO_LIST,method = RequestMethod.POST)
     String getUserInfoList(@RequestBody BaseReqDto<BaseUserInfo> dto);
 }
