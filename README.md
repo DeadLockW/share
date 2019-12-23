@@ -4,25 +4,25 @@
   1：springCloud（目前只加入了feign）
   2：mybatisPlus
   3：rabbitMq
-  4：反射
-  5：Aop
-  6：swagger2
-  7：nacos
-  8：动态代理
-  9：druid sql监控
-  9：监听器
-  10：过滤器
+  4：redis
+  5：反射
+  6：Aop
+  7：swagger2
+  8：nacos
+  9：动态代理设计模式
+  10：druid sql监控
+  11：监听器
+  12：过滤器
   
 待加入技术：
-  1：设计模式
-  2：redis
-  3：docker
-  4：爬虫技术
-  5：搜索引擎
-  6：zuul
-  7：Hystrix
-  8：Ribbon
-  9：Hystrix
+  1：其他设计模式
+  2：docker
+  3：爬虫技术
+  4：搜索引擎
+  5：zuul
+  6：Hystrix
+  7：Ribbon
+  8：Hystrix
   。。。。。。。。
   
   sql监控地址：http://127.0.0.1:8088/druid/sql.html admin admin
