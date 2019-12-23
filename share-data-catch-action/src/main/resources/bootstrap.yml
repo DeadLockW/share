@@ -8,13 +8,14 @@ management:
 
 spring:
   application:
-    name: share-data-catch-action
+    name: shareDataCatchAction
   profiles:
     active: #spring.profiles.active#
   cloud: 
     nacos:
       config: 
-        file-extension: properties #指定控制台配置文件格式 也可以使用yml
+        namespace: a87816f9-58eb-4d99-9e4e-3024927070f9
+        file-extension: yml #指定控制台配置文件格式 也可以使用yml
         group: DEFAULT_GROUP
         enabled: true
         #server-addr: 106.13.47.54:8848

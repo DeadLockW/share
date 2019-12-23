@@ -3,7 +3,7 @@ server:
     8082
 spring: 
   application:
-    name: share-data-catch-busi
+    name: shareDataCatchBusi
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 'wk19930829'

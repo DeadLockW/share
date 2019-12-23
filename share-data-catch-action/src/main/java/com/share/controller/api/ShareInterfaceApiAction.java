@@ -41,8 +41,6 @@ public class ShareInterfaceApiAction extends CommentController{
         	if (StringUtils.isBlank(parm)) {
         		throw new IllegalArgumentException("请求参数不能为空！");
 			}
-            redisTemplate.opsForValue().set("name","wangkai");
-        	System.out.println(redisTemplate.opsForValue().get("name"));
             BaseReqDto dto = JSONObject.toJavaObject(JSONObject.parseObject(parm), BaseReqDto.class);
             paramValidate(dto);
             String busiType = dto.getHeader().getTransType();

@@ -8,7 +8,7 @@ nacos:
 
 spring:
   application:
-    name: share-data-catch-busi
+    name: shareDataCatchBusi
   profiles:
     active: #spring.profiles.active#
   cloud: 
