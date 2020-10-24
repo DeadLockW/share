@@ -8,6 +8,7 @@ import java.util.Map;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,6 +24,7 @@ import com.share.constants.ProfileConstants;
 @EnableConfigurationProperties
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableRabbit
 @MapperScan(ActionServiceApplication.COM_SHARE_MAPPER)
 @EnableAspectJAutoProxy
 @RefreshScope
