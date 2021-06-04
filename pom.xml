@@ -24,7 +24,7 @@
         <mybatis-plus-boot-starter.version>3.1.1</mybatis-plus-boot-starter.version>
         <fastjson.version>1.2.15</fastjson.version>
         <druid.version>1.1.16</druid.version>
-        <httpclient.version>4.5.6</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <freemarker.version>2.3.28</freemarker.version>
         <commons-lang3.version>3.0</commons-lang3.version>
         <jaxen.version>1.1.6</jaxen.version>
