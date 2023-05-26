@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
+		<groupId>com.cooldatasoft</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		 <version>2.1.4.RELEASE</version>
+		 <version>2.6.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -34,7 +34,7 @@
         <httpcore.version>4.4.5</httpcore.version>
         <commons-lang.version>2.6</commons-lang.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-        <spring-cloud-alibaba.version>0.9.0.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
 
         <!-- plugins version -->
         <sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
@@ -47,20 +47,58 @@
         <project.version>0.0.1-SNAPSHOT</project.version>
 
 	</properties>
-
-	<dependencies>
-           <dependency>
+	<dependencyManagement>
+		<dependencies>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+			<version>${spring-cloud-alibaba.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
-				<version>${spring-cloud-alibaba.version}</version>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2021.0.1</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-boot-starter.version}</version>
-            </dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+           <dependency>
+			   <groupId>com.alibaba.cloud</groupId>
+			   <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+			   <version>${spring-cloud-alibaba.version}</version>
+			   <type>pom</type>
+			   <scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2021.0.1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>${mybatis-plus-boot-starter.version}</version>
+		</dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
@@ -158,7 +196,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-			<version>2.9.0</version>
+			<version>3.7.1</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

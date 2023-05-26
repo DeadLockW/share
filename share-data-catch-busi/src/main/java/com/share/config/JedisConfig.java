@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -37,8 +38,8 @@ public class JedisConfig extends CachingConfigurerSupport {
     @Value("${spring.redis.database}")
     private int database;
 
-    @Value("${spring.redis.password}")
-    private String password;
+//    @Value("${spring.redis.password}")
+//    private String password;
 
     @Value("${spring.redis.jedis.pool.max-idle}")
     private int maxIdle;
@@ -68,7 +69,8 @@ public class JedisConfig extends CachingConfigurerSupport {
      * 注入RedisConnectionFactory
      * @return
      */
-    @Bean
+    @Bean(name = "redisConnectionFactory")
+    @Primary
     public RedisConnectionFactory redisConnectionFactory(JedisPoolConfig jedisPoolConfig) {
         log.info("初始化JedisConnectionFactory");
     /* 在Spring Boot 1.x中已经过时，采用RedisStandaloneConfiguration配置
@@ -81,7 +83,7 @@ public class JedisConfig extends CachingConfigurerSupport {
         redisStandaloneConfiguration.setHostName(host);
         redisStandaloneConfiguration.setPort(port);
         redisStandaloneConfiguration.setDatabase(database);
-        redisStandaloneConfiguration.setPassword(password);
+//        redisStandaloneConfiguration.setPassword(password);
         // JedisConnectionFactory配置jedisPoolConfig
         JedisClientConfiguration.JedisPoolingClientConfigurationBuilder jedisPoolConfigBuilder =
                 (JedisClientConfiguration.JedisPoolingClientConfigurationBuilder) JedisClientConfiguration.builder();

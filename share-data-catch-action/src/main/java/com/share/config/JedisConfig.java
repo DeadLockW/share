@@ -37,8 +37,8 @@ public class JedisConfig extends CachingConfigurerSupport {
     @Value("${spring.redis.database}")
     private int database;
 
-    @Value("${spring.redis.password}")
-    private String password;
+//    @Value("${spring.redis.password}")
+//    private String password;
 
     @Value("${spring.redis.jedis.pool.max-idle}")
     private int maxIdle;
@@ -81,7 +81,7 @@ public class JedisConfig extends CachingConfigurerSupport {
         redisStandaloneConfiguration.setHostName(host);
         redisStandaloneConfiguration.setPort(port);
         redisStandaloneConfiguration.setDatabase(database);
-        redisStandaloneConfiguration.setPassword(password);
+//        redisStandaloneConfiguration.setPassword(password);
         // JedisConnectionFactory配置jedisPoolConfig
         JedisClientConfiguration.JedisPoolingClientConfigurationBuilder jedisPoolConfigBuilder =
                 (JedisClientConfiguration.JedisPoolingClientConfigurationBuilder) JedisClientConfiguration.builder();
